@@ -11,6 +11,7 @@ dependencies = [
     "dbt-sqlserver (>=1.8.0,<2.0.0)",
     "dbt (>=1.0.0.40.5,<2.0.0.0.0)",
     "pyodbc>=4.0.0",
+    "dbt-prql @ git+https://github.com/PRQL/dbt-prql.git",
 ]
 
 

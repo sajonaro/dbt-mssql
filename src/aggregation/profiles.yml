@@ -9,7 +9,7 @@ aggregation:
       server: "{{ env_var('DBT_SERVER_HOST') }}"
       port: 1433
       database: "{{ env_var('DBT_OUTPUT_DB_NAME') }}" 
-      schema: dbo
+      schema: cso
       authentication: sql  
       user: "{{ env_var('DBT_USER') }}"
       password: "{{ env_var('DBT_PASSWORD') }}"

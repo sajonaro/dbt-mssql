@@ -548,6 +548,27 @@ dbt-core = ">=1.8.0"
 pyodbc = ">=4.0.35,<5.2.0"
 
 [[package]]
+name = "dbt-prql"
+version = "0.2.4"
+description = "Write PRQL in dbt models"
+optional = false
+python-versions = ">=3.8,<4.0"
+groups = ["main"]
+files = []
+develop = false
+
+[package.dependencies]
+dbt-common = ">=1.10.0,<1.22.0"
+dbt-core = ">=1.8.0,<=1.9.4"
+prql_python = "0.11.2"
+
+[package.source]
+type = "git"
+url = "https://github.com/PRQL/dbt-prql.git"
+reference = "HEAD"
+resolved_reference = "f605178cf7465ee0529d7cf199fb3453eb4d5bea"
+
+[[package]]
 name = "dbt-semantic-interfaces"
 version = "0.7.4"
 description = "The shared semantic layer definitions that dbt-core and MetricFlow use"
@@ -1035,6 +1056,24 @@ files = [
     {file = "protobuf-5.29.2-py3-none-any.whl", hash = "sha256:fde4554c0e578a5a0bcc9a276339594848d1e89f9ea47b4427c80e5d72f90181"},
     {file = "protobuf-5.29.2.tar.gz", hash = "sha256:b2cc8e8bb7c9326996f0e160137b0861f1a82162502658df2951209d0cb0309e"},
 ]
+
+[[package]]
+name = "prql-python"
+version = "0.11.2"
+description = ""
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "prql_python-0.11.2-cp37-abi3-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:77472d54e40920012465170d2c18e55f968ef242051411f963358aa64fe8a707"},
+    {file = "prql_python-0.11.2-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7df71fb962c6fbd65bd28555f46a1d20d3b7c5aa684989c3351822e6d10e9228"},
+    {file = "prql_python-0.11.2-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8b3d2b3a0fc88f5b5f2d84ed625ee5636ca1d2f19c4c3c5ce0efd5e7b3dc25b5"},
+    {file = "prql_python-0.11.2-cp37-abi3-win_amd64.whl", hash = "sha256:78bf105a542421251463b33e2026ffb9dca6cdf0cc8a2194734cc57558513192"},
+    {file = "prql_python-0.11.2.tar.gz", hash = "sha256:79924121c1cf4ae3b96a23753851f84ec0bf69f84524867ab17875d4657cd7e9"},
+]
+
+[package.extras]
+test = ["mypy (==1.8.0)", "pytest (>=7)"]
 
 [[package]]
 name = "pycparser"
@@ -1675,4 +1714,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.13"
-content-hash = "3fdea29db5a9c030ae1e16fd86bbe7a455a9fc95067b692f3ee423382347664b"
+content-hash = "ec2de995abbfc157972c76217cbfcc902b1552206d8c13d401b7a2a9983f0145"
