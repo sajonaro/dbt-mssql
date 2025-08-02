@@ -1,0 +1,18 @@
+aggregation:
+
+  target: dev 
+  
+  outputs:
+    dev:
+      type: sqlserver
+      driver: 'FreeTDS'
+      server: "{{ env_var('DBT_SERVER_HOST') }}"
+      port: 1433
+      database: "{{ env_var('DBT_OUTPUT_DB_NAME') }}" 
+      schema: dbo
+      authentication: sql  
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      threads: 4
+      trust_cert: true  # Set to false in production
+      encrypt: false  # FreeTDS may have issues with encryption

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoso Local Database - Schema Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .diagram-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .legend {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .legend h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .legend ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .legend li {
+            margin: 5px 0;
+        }
+        .schema-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .sample-data {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contoso Local Database - Schema Diagram</h1>
+        
+        <div class="diagram-container">
+            <div class="mermaid">
+erDiagram
+    %% Dimension Tables
+    DimDate {
+        datetime Datekey PK
+        nvarchar FullDateLabel
+        nvarchar DateDescription
+        int CalendarYear
+        nvarchar CalendarYearLabel
+        int CalendarHalfYear
+        nvarchar CalendarHalfYearLabel
+        int CalendarQuarter
+        nvarchar CalendarQuarterLabel
+        int CalendarMonth
+        nvarchar CalendarMonthLabel
+        int CalendarWeek
+        nvarchar CalendarWeekLabel
+        int CalendarDayOfWeek
+        nvarchar CalendarDayOfWeekLabel
+        int FiscalYear
+        nvarchar FiscalYearLabel
+        int FiscalHalfYear
+        nvarchar FiscalHalfYearLabel
+        int FiscalQuarter
+        nvarchar FiscalQuarterLabel
+        int FiscalMonth
+        nvarchar FiscalMonthLabel
+        nvarchar IsWorkDay
+        int IsHoliday
+        nvarchar HolidayName
+        nvarchar EuropeSeason
+        nvarchar NorthAmericaSeason
+        nvarchar AsiaSeason
+    }
+
+    DimCurrency {
+        int CurrencyKey PK
+        nvarchar CurrencyLabel
+        nvarchar CurrencyName
+        nvarchar CurrencyDescription
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimChannel {
+        int ChannelKey PK
+        nvarchar ChannelLabel
+        nvarchar ChannelName
+        nvarchar ChannelDescription
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimGeography {
+        int GeographyKey PK
+        nvarchar GeographyType
+        nvarchar ContinentName
+        nvarchar CityName
+        nvarchar StateProvinceName
+        nvarchar RegionCountryName
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimProductCategory {
+        int ProductCategoryKey PK
+        nvarchar ProductCategoryLabel
+        nvarchar ProductCategoryName
+        nvarchar ProductCategoryDescription
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimProductSubcategory {
+        int ProductSubcategoryKey PK
+        nvarchar ProductSubcategoryLabel
+        nvarchar ProductSubcategoryName
+        nvarchar ProductSubcategoryDescription
+        int ProductCategoryKey FK
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimProduct {
+        int ProductKey PK
+        nvarchar ProductLabel
+        nvarchar ProductName
+        nvarchar ProductDescription
+        int ProductSubcategoryKey FK
+        nvarchar Manufacturer
+        nvarchar BrandName
+        nvarchar ClassID
+        nvarchar ClassName
+        nvarchar StyleID
+        nvarchar StyleName
+        nvarchar ColorID
+        nvarchar ColorName
+        nvarchar Size
+        nvarchar SizeRange
+        nvarchar SizeUnitMeasureID
+        float Weight
+        nvarchar WeightUnitMeasureID
+        nvarchar UnitOfMeasureID
+        nvarchar UnitOfMeasureName
+        nvarchar StockTypeID
+        nvarchar StockTypeName
+        money UnitCost
+        money UnitPrice
+        datetime AvailableForSaleDate
+        datetime StopSaleDate
+        nvarchar Status
+        nvarchar ImageURL
+        nvarchar ProductURL
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimStore {
+        int StoreKey PK
+        int GeographyKey FK
+        int StoreManager
+        nvarchar StoreType
+        nvarchar StoreName
+        nvarchar StoreDescription
+        nvarchar Status
+        datetime OpenDate
+        datetime CloseDate
+        int EntityKey
+        nvarchar ZipCode
+        nvarchar ZipCodeExtension
+        nvarchar StorePhone
+        nvarchar StoreFax
+        nvarchar AddressLine1
+        nvarchar AddressLine2
+        nvarchar CloseReason
+        int EmployeeCount
+        float SellingAreaSize
+        datetime LastRemodelDate
+        nvarchar GeoLocation
+        nvarchar Geometry
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimCustomer {
+        int CustomerKey PK
+        int GeographyKey FK
+        nvarchar CustomerLabel
+        nvarchar Title
+        nvarchar FirstName
+        nvarchar MiddleName
+        nvarchar LastName
+        bit NameStyle
+        datetime BirthDate
+        nchar MaritalStatus
+        nvarchar Suffix
+        nvarchar Gender
+        nvarchar EmailAddress
+        money YearlyIncome
+        tinyint TotalChildren
+        tinyint NumberChildrenAtHome
+        nvarchar Education
+        nvarchar Occupation
+        nchar HouseOwnerFlag
+        tinyint NumberCarsOwned
+        nvarchar AddressLine1
+        nvarchar AddressLine2
+        nvarchar Phone
+        datetime DateFirstPurchase
+        nvarchar CustomerType
+        nvarchar CompanyName
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    DimPromotion {
+        int PromotionKey PK
+        nvarchar PromotionLabel
+        nvarchar PromotionName
+        nvarchar PromotionDescription
+        float DiscountPercent
+        nvarchar PromotionType
+        nvarchar PromotionCategory
+        datetime StartDate
+        datetime EndDate
+        int MinQuantity
+        int MaxQuantity
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    %% Fact Tables
+    FactSales {
+        int SalesKey PK
+        datetime DateKey FK
+        int channelKey FK
+        int StoreKey FK
+        int ProductKey FK
+        int PromotionKey FK
+        int CurrencyKey FK
+        money UnitCost
+        money UnitPrice
+        int SalesQuantity
+        int ReturnQuantity
+        money ReturnAmount
+        int DiscountQuantity
+        money DiscountAmount
+        money TotalCost
+        money SalesAmount
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    FactOnlineSales {
+        int OnlineSalesKey PK
+        datetime DateKey FK
+        int StoreKey FK
+        int ProductKey FK
+        int PromotionKey FK
+        int CurrencyKey FK
+        int CustomerKey FK
+        nvarchar SalesOrderNumber
+        int SalesOrderLineNumber
+        int SalesQuantity
+        money SalesAmount
+        int ReturnQuantity
+        money ReturnAmount
+        int DiscountQuantity
+        money DiscountAmount
+        money TotalCost
+        money UnitCost
+        money UnitPrice
+        int ETLLoadID
+        datetime LoadDate
+        datetime UpdateDate
+    }
+
+    %% Views
+    vw_SalesByProduct {
+        nvarchar ProductName
+        nvarchar BrandName
+        nvarchar ProductCategoryName
+        int TotalQuantitySold
+        money TotalSalesAmount
+        money AverageUnitPrice
+    }
+
+    vw_SalesByStore {
+        nvarchar StoreName
+        nvarchar CityName
+        nvarchar RegionCountryName
+        int TotalQuantitySold
+        money TotalSalesAmount
+        int DaysWithSales
+    }
+
+    vw_SalesByMonth {
+        int CalendarYear
+        int CalendarMonth
+        nvarchar CalendarMonthLabel
+        int TotalQuantitySold
+        money TotalSalesAmount
+        int UniqueProductsSold
+    }
+
+    %% Relationships - Dimension Hierarchies
+    DimProductCategory ||--o{ DimProductSubcategory : "contains"
+    DimProductSubcategory ||--o{ DimProduct : "categorizes"
+    DimGeography ||--o{ DimStore : "located_in"
+    DimGeography ||--o{ DimCustomer : "resides_in"
+
+    %% Fact Table Relationships - FactSales
+    DimDate ||--o{ FactSales : "sales_date"
+    DimChannel ||--o{ FactSales : "sales_channel"
+    DimStore ||--o{ FactSales : "sold_at"
+    DimProduct ||--o{ FactSales : "product_sold"
+    DimPromotion ||--o{ FactSales : "promotion_applied"
+    DimCurrency ||--o{ FactSales : "currency_used"
+
+    %% Fact Table Relationships - FactOnlineSales
+    DimDate ||--o{ FactOnlineSales : "order_date"
+    DimStore ||--o{ FactOnlineSales : "fulfillment_store"
+    DimProduct ||--o{ FactOnlineSales : "product_ordered"
+    DimPromotion ||--o{ FactOnlineSales : "promotion_used"
+    DimCurrency ||--o{ FactOnlineSales : "transaction_currency"
+    DimCustomer ||--o{ FactOnlineSales : "customer"
+
+    %% View Relationships (conceptual)
+    FactSales ||--o{ vw_SalesByProduct : "aggregates"
+    FactSales ||--o{ vw_SalesByStore : "aggregates"
+    FactSales ||--o{ vw_SalesByMonth : "aggregates"
+    DimProduct ||--o{ vw_SalesByProduct : "product_info"
+    DimStore ||--o{ vw_SalesByStore : "store_info"
+    DimDate ||--o{ vw_SalesByMonth : "time_info"
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>Schema Legend</h3>
+            <ul>
+                <li><strong>Dimension Tables (Dim*):</strong> Master data tables with descriptive attributes</li>
+                <li><strong>Fact Tables (Fact*):</strong> Transaction tables with measurable business metrics</li>
+                <li><strong>Views (vw_*):</strong> Pre-built analytical views for common reporting needs</li>
+                <li><strong>PK:</strong> Primary Key (Identity columns)</li>
+                <li><strong>FK:</strong> Foreign Key (References other tables)</li>
+                <li><strong>Relationships:</strong> Lines show foreign key constraints and data flow</li>
+            </ul>
+        </div>
+
+        <div class="schema-info">
+            <h3>Local Database Information</h3>
+            <p><strong>Database:</strong> ContosoRetailDW (Local Version)</p>
+            <p><strong>Schema:</strong> cso</p>
+            <p><strong>Architecture:</strong> Simplified Star Schema</p>
+            <p><strong>Purpose:</strong> Local development and testing environment</p>
+            
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>Simplified Structure:</strong> Focused on core retail operations</li>
+                <li><strong>Sample Data:</strong> Pre-populated with test data for 2023</li>
+                <li><strong>Performance Optimized:</strong> Includes indexes on fact table foreign keys</li>
+                <li><strong>Analytical Views:</strong> Ready-to-use views for common business questions</li>
+            </ul>
+
+            <h4>Business Areas Covered:</h4>
+            <ul>
+                <li><strong>Product Management:</strong> Categories, subcategories, and product details</li>
+                <li><strong>Store Operations:</strong> Store locations and geographic information</li>
+                <li><strong>Customer Management:</strong> Customer demographics and purchase history</li>
+                <li><strong>Sales Tracking:</strong> In-store and online sales transactions</li>
+                <li><strong>Promotions:</strong> Discount and promotional campaign tracking</li>
+                <li><strong>Time Intelligence:</strong> Complete date dimension for temporal analysis</li>
+            </ul>
+        </div>
+
+        <div class="sample-data">
+            <h3>Sample Data Included</h3>
+            <ul>
+                <li><strong>Currencies:</strong> USD, EUR, GBP, CAD, JPY</li>
+                <li><strong>Channels:</strong> Store, Online, Catalog, Reseller</li>
+                <li><strong>Geographies:</strong> 9 cities across North America, Europe, and Asia</li>
+                <li><strong>Product Categories:</strong> 8 categories (Audio, TV, Computers, etc.)</li>
+                <li><strong>Products:</strong> 6 sample Contoso brand products</li>
+                <li><strong>Stores:</strong> 5 flagship stores in major cities</li>
+                <li><strong>Customers:</strong> 5 sample customer profiles</li>
+                <li><strong>Promotions:</strong> 5 promotional campaigns</li>
+                <li><strong>Sales Data:</strong> 18 sales transactions and 10 online orders</li>
+                <li><strong>Date Range:</strong> Complete 2023 calendar year</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            },
+            er: {
+                useMaxWidth: true,
+                fontSize: 11,
+                fontFamily: 'Arial, sans-serif'
+            }
+        });
+    </script>
+</body>
+</html>
